@@ -1,12 +1,15 @@
-# Example JavaScript Project Setup
+# JavaScript Module Experiments
 
-## Goals
+One of the many sucky things about JavaScript is its lack of support for modules. As a result, a number of people have built different systems which are all sort of incompatible. In trying to get a good JavaScript development setup, I did these experiments about JS modules. Comments welcomed.
 
-* Type checking using the Closure compiler.
+
+## Ideal Goals
+
 * Run unit tests in a browser.
 * Run unit tests in a browser from the command line (PhantomJS).
 * Import modules in Node.
 * Run unit tests from the command line using Node.
+* Type checking using the Closure compiler.
 * Development flow: save the file, click reload, see your changes.
 
 
@@ -15,9 +18,7 @@ Sadly, since JavaScript modules are mostly incompatible, to do this we use Googl
 To make this work, unfortunately I need to transform the Javascript files from one form to another.
 
 
-## Types of JavaScript modules
-
-This is just a subset. 
+## Common types of JavaScript modules
 
 ### Basic browser module
 ```javascript
@@ -37,14 +38,16 @@ namespace.module.myFunction = function() {
 })();
 ```
 
-* ✓ someLocal is hidden in the anonymous closure.
+Example: [`basic_browser`](../../tree/master/basic_browser)
+
+* ✓ `someLocal` is hidden in the anonymous closure.
 * ✓ runs directly in a browser.
 * ✓ can be type checked.
 * ✗ dependencies must be "magically" loaded by some other system.
 * ✗ requires a bunch of boilerplate for deeply nested namespaces.
 
 
-### Node/CommonJS modules
+### Node modules
 ```javascript
 var global = require('global');
 var relative = require('./relative');
@@ -58,7 +61,12 @@ exports.myFunction = function() {
 };
 ```
 
-* Browserify can transform this into a browser friendly version.
+Example: [`node`](../../tree/master/node)
+
+* ✓ someLocal is purely local
+* ✓ npm fetches dependencies, and browserify can run it in a browser.
+* ✓ relatively free of boilerplate
+* ✗ can't be type checked: Closure doesn't understand require.
 
 
 ### Native Google Closure modules
@@ -77,7 +85,10 @@ namespace.module.myFunction = function() {
 };
 ```
 
-* someLocal ends up in the global namespace, but the compiler will rename/remove it.
+* ✓ `someLocal` is a global (use `goog.scope` to hide it)
+* ✓ npm fetches dependencies, and browserify can run it in a browser.
+* ✓ relatively free of boilerplate
+* ✗ can't be type checked: Closure doesn't understand require.
 
 
 ### NodeJS/Browserify module that is Closure Compiler friendly
