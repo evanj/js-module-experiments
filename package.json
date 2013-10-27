@@ -1,0 +1,32 @@
+{
+  "name": "wtftest",
+  "version": "0.0.1",
+  "description": "Test writing JS that compiles and tests in node and browser.",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/evanj/closure-project-example.git"
+  },
+  "author": {
+    "name": "Evan Jones",
+    "email": "ej@evanjones.ca",
+    "url": "http://www.evanjones.ca/"
+  },
+  "scripts": {
+    "test": "mocha --check-leaks"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "engines": {
+    "node": ">=0.10.3"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ]
+}
