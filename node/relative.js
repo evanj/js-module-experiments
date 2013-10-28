@@ -17,5 +17,9 @@ namespace.relative.relativeFunction = function(a) {
   return someLocal('hi') + a;
 };
 
-exports.relativeFunction = namespace.relative.relativeFunction;
+if (typeof exports !== 'undefined') {
+  for (var member in namespace.relative) {
+    exports[member] = namespace.relative[member];
+  }
+}
 })();

@@ -15,5 +15,9 @@ namespace.module.exported = function() {
   return someLocal(5) + namespace.relative.relativeFunction(5);
 };
 
-exports.exported = namespace.module.exported;
+if (typeof exports !== 'undefined') {
+  for (var member in namespace.module) {
+    exports[member] = namespace.module[member];
+  }
+}
 })();

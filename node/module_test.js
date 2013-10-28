@@ -1,7 +1,10 @@
-var should = should || require('should');
-
 var namespace = namespace || {};
-namespace.module = require('./module');
+namespace.module = namespace.module || require('./module');
+// should is magic because it messes with Object.prototype, so we can't use the
+// var module = module || require('module') trick
+if (!Object.prototype.should) {
+  require('should');
+}
 
 describe('module', function() {
   describe('#exported()', function() {
