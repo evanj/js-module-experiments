@@ -2,7 +2,6 @@ var goog = goog || {};
 
 goog.globalContext_ = this;
 goog.provide = function(argument) {
-  console.log('provides', argument, goog.globalContext_);
   var parts = argument.split('.');
 
   var context = goog.globalContext_;
@@ -15,11 +14,9 @@ goog.provide = function(argument) {
     }
     context = next;
   }
-  console.log('provided', goog.globalContext_[parts[0]]);
 };
 
 goog.require = function(argument) {
-  console.log('requires', argument, goog.globalContext_);
   var parts = argument.split('.');
 
   var context = goog.globalContext_;
