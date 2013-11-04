@@ -19,7 +19,9 @@ namespace.relative.relativeFunction = function(a) {
 
 if (typeof exports !== 'undefined') {
   for (var member in namespace.relative) {
-    exports[member] = namespace.relative[member];
+    if (namespace.relative.hasOwnProperty(member)) {
+      exports[member] = namespace.relative[member];
+    }
   }
 }
 })();

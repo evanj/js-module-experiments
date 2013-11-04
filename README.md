@@ -1,7 +1,10 @@
 # JavaScript Module Experiments
 
-One of the many sucky things about JavaScript is its lack of support for modules. As a result, a number of people have built different systems which are all sort of incompatible. In trying to get a good JavaScript development setup, I did these experiments about JS modules. Comments welcomed.
+One of the many sucky things about JavaScript is its lack of support for modules. As a result, a number of people have built different systems which are all sort of incompatible. While trying to figure out a good JavaScript development setup, I found it helpful to implement a simple module in a few different ways. Comments welcomed.
 
+## Building/running tests
+
+Run `make`.
 
 ## Ideal Goals
 
@@ -22,7 +25,6 @@ To make this work, unfortunately I need to transform the Javascript files from o
 
 ### Basic browser module
 ```javascript
-/** @suppress{duplicate} */
 var namespace = namespace || {};
 namespace.module = namespace.module || {};
 (function(){
@@ -69,7 +71,7 @@ Example: [`node`](../../tree/master/node)
 * ✗ can't be type checked: Closure doesn't understand require.
 
 
-### Native Google Closure modules
+### Google Closure modules
 ```javascript
 goog.provide('namespace.module');
 
@@ -85,24 +87,62 @@ namespace.module.myFunction = function() {
 };
 ```
 
-* ✓ `someLocal` is a global (use `goog.scope` to hide it)
-* ✓ npm fetches dependencies, and browserify can run it in a browser.
-* ✓ relatively free of boilerplate
-* ✗ can't be type checked: Closure doesn't understand require.
+Example: [`closure`](closure)
+
+* ✓ relatively free of boilerplate.
+* ✓ there is a way to determine which files are needed.
+* ✓ can be type checked.
+* ✗ `someLocal` is global, although you can put everything in a closure to hide it (or use `goog.scope`). However, this may not be needed, since the compiler will tell you if you clobber another variable.
+* ✗ doesn't work directly in node.
+* ✗ requires Closure library (although see [`closure/fakebase.js`](closure/fakebase.js))
+* ✗ not widely used.
 
 
-### NodeJS/Browserify module that is Closure Compiler friendly
+### NodeJS module that is Closure Compiler friendly
 ```javascript
-var namespace = {};
-namespace.module = {};
-var global = require('global');
-namespace.relative = require('./relative');
+/** @suppress{duplicate} */
+var namespace = namespace || {};
+namespace.module = namespace.module || {};
+(function() {
+var global = global || require('global');
+namespace.relative = namespace.relative || require('./relative');
 
 var someLocal = function() {
   return 5;
-}
+};
 
 namespace.module.myFunction = function() {
   return global.someFunction() + namespace.relative.someFunction() + someLocal();
 };
+
+if (typeof exports !== 'undefined') {
+  for (var member in namespace.relative) {
+    if (namespace.relative.hasOwnProperty(member)) {
+      exports[member] = namespace.relative[member];
+    }
+  }
+}
+})();
+
 ```
+
+To make this work: 
+
+* Use `@suppress{duplicate}` on namespaces to suppress duplicate warnings.
+* Import modules using `require` if they don't exist (```var module = module || require('module');```).
+* Always use "fully qualified" names (`namespace.module.symbol`).
+* Detect the `exports` object using typeof, and export all properties.
+
+* ✓ can be type checked.
+* ✓ can be used with Node.
+* ✓ can be used in the browser, with or without compilation.
+* ✗ no clean way to determine which files are required.
+* ✗ some ugly boilerplate is required.
+
+
+# Other Projects using Closure Compiler:
+
+* https://github.com/Lindurion/closure-pro-build
+* https://github.com/steida/este
+* https://github.com/google/module-server
+

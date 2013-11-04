@@ -17,7 +17,9 @@ namespace.module.exported = function() {
 
 if (typeof exports !== 'undefined') {
   for (var member in namespace.module) {
-    exports[member] = namespace.module[member];
+    if (namespace.module.hasOwnProperty(member)) {
+      exports[member] = namespace.module[member];
+    }
   }
 }
 })();
