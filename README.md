@@ -4,7 +4,10 @@ One of the many sucky things about JavaScript is its lack of support for modules
 
 ## Building/running tests
 
-Run `make`.
+1. Install PhantomJS: `brew install phantomjs`
+2. Install NPM dependencies: `npm install`
+3. Run the compiler and tests: `make`
+* Delete intermediate files: `make clean`
 
 ## Ideal Goals
 

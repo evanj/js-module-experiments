@@ -16,7 +16,11 @@
     <script src="module_test.js"></script>
     <!--<script src="../build/basic_browser/compiled.js"></script>-->
     <script>
-      mocha.run();
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
     </script>
   </body>
 </html>
