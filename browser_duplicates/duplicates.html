@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Duplicates</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="duplicates.js"></script>
+    <script>
+    var test = function() {
+      duplicateFunction();
+      duplicateVarFunction();
+      console.log('duplicateVar:', duplicateVar);
+      console.log('duplicateNoVar:', duplicateNoVar);
+    }
+    console.log('-- BEFORE LOAD FINISHED:');
+    test();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('-- AFTER LOAD FINISHED:');
+      test();
+    });
+    </script>
+    <script>
+    function duplicateFunction() {
+      console.log('inline script function');
+    }
+
+    var duplicateVar = 'inline script var';
+    duplicateNoVar = 'inline script no var';
+
+    var duplicateVarFunction = function() {
+      console.log('inline script function duplicateVarFunction');
+    };
+    </script>
+  </head>
+  <body>
+  <p>Look at the console output</p>
+  </body>
+</html>
