@@ -4,10 +4,10 @@ One of the many sucky things about JavaScript is its lack of support for modules
 
 ## Building/running tests
 
-1. Install PhantomJS: `brew install phantomjs`
-2. Install NPM dependencies: `npm install`
-3. Run the compiler and tests: `make`
-* Delete intermediate files: `make clean`
+1. Install NPM dependencies: `npm install` 
+2. Compile with Closure, run all tests: `make`
+3. Check out the examples. E.g. `open simple_both_closure/example_compiled.html`
+
 
 ## Ideal Goals
 
@@ -131,7 +131,8 @@ if (typeof exports !== 'undefined') {
 
 To make this work: 
 
-* Use `@suppress{duplicate}` on namespaces to suppress duplicate warnings.
+* Use `var namespace = namespace || new Object();` to avoid Closure duplicate namespace warnings [1](http://blog.teamleadnet.com/2013/04/compiling-javascript-code-to-detect.html) [2](https://code.google.com/p/closure-compiler/issues/detail?id=970)
+* Use `@suppress{duplicate}` on the namespace to suppress duplicate warnings.
 * Import modules using `require` if they don't exist (```var module = module || require('module');```).
 * Always use "fully qualified" names (`namespace.module.symbol`).
 * Detect the `exports` object using typeof, and export all properties.
