@@ -3,25 +3,19 @@ BUILD_DIR=build
 
 CLOSURE_COMPILER=java -jar node_modules/closure-compiler/lib/vendor/compiler.jar
 CLOSURE_FLAGS=--language_in ECMASCRIPT5_STRICT --warning_level VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS
+KARMA=node_modules/karma/bin/karma
 
-all: $(BUILD_DIR)/node_and_browser_closure/caller.js
+all: test $(BUILD_DIR)/node_and_browser_closure/caller.js
 
-test: $(BUILD_DIR)/basic_browser/tested.stamp $(BUILD_DIR)/node/tested.stamp $(BUILD_DIR)/node/compiled-tested.stamp $(BUILD_DIR)/closure/tested.stamp $(BUILD_DIR)/node/browser-tested.stamp
+test: $(BUILD_DIR)/browser/mylib_test.js.stamp
 
 clean:
 	$(RM) -r $(BUILD_DIR)
 
-# JS_TESTS:=$(shell find $(SOURCE_DIR) -type f -name '*_test.js')
-
-# test: $(BROWSER_TEST_DIR)/index.html
-# 	$(BIN)/mocha --reporter spec $(JS_TESTS)
-
-# $(BROWSER_TEST_DIR)/index.html: ./makemochahtml.py $(JS_TESTS)
-# 	./makemochahtml.py $(BROWSER_TEST_DIR)/index.html $(JS_TESTS)
-
-# $(BROWSER_TEST_DIR)/mocha.css:
-# 	mkdir -p $(BROWSER_TEST_DIR)
-# 	$(BIN)/mocha init $(BROWSER_TEST_DIR)
+$(BUILD_DIR)/browser/mylib_test.js.stamp: browser/browser.conf.js browser/mylib.js browser/mylib_test.js
+	mkdir -p $(dir $@)
+	$(KARMA) start $< --single-run
+	touch $@
 
 $(BUILD_DIR)/node_and_browser_closure/caller.js: node_and_browser_closure/mylib.js node_and_browser_closure/caller.js
 	mkdir -p $(dir $@)

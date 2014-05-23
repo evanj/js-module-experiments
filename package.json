@@ -19,7 +19,10 @@
   "devDependencies": {
     "jasmine-node": ">=2.0.0-beta4",
     "closure-compiler": "*",
-    "jasmine-core": ">=2.0.0"
+    "jasmine-core": ">=2.0.0",
+    "karma": "*",
+    "karma-jasmine": ">=0.2.0",
+    "karma-phantomjs-launcher": "*"
   },
   "engines": {
     "node": ">=0.10.3"

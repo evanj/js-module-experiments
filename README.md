@@ -11,14 +11,18 @@ This repository shows how to do this.
 
 ## Building/running tests
 
-1. Install NPM dependencies: `npm install` 
+1. Install PhantomJS (using Brew on Mac: `brew install phantomjs`)
+1. Install NPM dependencies: `npm install`
 2. Compile with Closure, run all tests: `make`
 3. Check out the examples. E.g. `open simple_both_closure/example_compiled.html`
 
 
 ## Brief contents
 
-* `browser`: Web browser module. `open browser/example.html` or `open browser/mylib_test.html`
+* `browser`: Web browser module
+    - Example use: `open browser/example.html`
+    - Browser unit test: `open browser/mylib_test.html`
+    - Automated unit test: ``
 * `node`: Same example for NodeJS. Run `node node/caller.js`.
 * `node_and_browser`: Module that works with both: `open node_and_browser/example.html` and run `node node_and_browser/caller.js`.
 * `node_and_browser_closure`: Module that works with both and can by type-checked using Google's Closure compiler.
