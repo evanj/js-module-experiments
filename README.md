@@ -6,7 +6,7 @@ This repository contains some simple examples I used to figure out how to get an
 * Unit tests to run in both, from the command line (we use jasmine, jasmine-node, and Karma).
 * Type-checked with the Closure compiler.
 
-This repository shows how to do this.
+For details, see [my blog post about JavaScript modules](http://www.evanjones.ca/js-modules.html).
 
 
 ## Building and running tests
