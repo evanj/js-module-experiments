@@ -18,7 +18,8 @@
   },
   "devDependencies": {
     "jasmine-node": ">=2.0.0-beta4",
-    "closure-compiler": "*"
+    "closure-compiler": "*",
+    "jasmine-core": ">=2.0.0"
   },
   "engines": {
     "node": ">=0.10.3"

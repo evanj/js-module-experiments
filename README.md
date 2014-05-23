@@ -18,9 +18,9 @@ This repository shows how to do this.
 
 ## Brief contents
 
-* `browser`: Example web browser module.
-* `node`: Same example for NodeJS.
-* `node_and_browser`: Module that works with both.
+* `browser`: Web browser module. `open browser/example.html` or `open browser/mylib_test.html`
+* `node`: Same example for NodeJS. Run `node node/caller.js`.
+* `node_and_browser`: Module that works with both: `open node_and_browser/example.html` and run `node node_and_browser/caller.js`.
 * `node_and_browser_closure`: Module that works with both and can by type-checked using Google's Closure compiler.
 
 
