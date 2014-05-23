@@ -9,23 +9,34 @@ This repository contains some simple examples I used to figure out how to get an
 This repository shows how to do this.
 
 
-## Building/running tests
+## Building and running tests
 
 1. Install PhantomJS (using Brew on Mac: `brew install phantomjs`)
-1. Install NPM dependencies: `npm install`
-2. Compile with Closure, run all tests: `make`
-3. Check out the examples. E.g. `open simple_both_closure/example_compiled.html`
+2. Install NPM dependencies: `npm install`
+3. Compile with Closure, run all tests: `make`
+4. Check out the examples. E.g. `open simple_both_closure/example_compiled.html`
 
 
-## Brief contents
+## Detailed contents
 
 * `browser`: Web browser module
-    - Example use: `open browser/example.html`
-    - Browser unit test: `open browser/mylib_test.html`
-    - Automated unit test: ``
-* `node`: Same example for NodeJS. Run `node node/caller.js`.
-* `node_and_browser`: Module that works with both: `open node_and_browser/example.html` and run `node node_and_browser/caller.js`.
-* `node_and_browser_closure`: Module that works with both and can by type-checked using Google's Closure compiler.
+  - Example: `open browser/example.html`
+  - Browser unit test: `open browser/mylib_test.html`
+  - Automated unit test: `node_modules/karma/bin/karma start browser/browser.conf.js --single-run`
+* `node`: Same example for NodeJS.
+  - Example: `node node/caller.js`
+  - Unit test: `./node_modules/.bin/jasmine-node --matchAll node/mylib_test.js`
+* `node_and_browser`: Module that works with both.
+  - Example browser: `open node_and_browser/example.html` node: `node node_and_browser/caller.js`
+  - Browser unit test: `open node_and_browser/mylib_test.html`
+  - Automated browser test: `node_modules/karma/bin/karma start node_and_browser/node_and_browser.conf.js --single-run`
+  - Automated node test: `./node_modules/.bin/jasmine-node --matchAll node_and_browser/mylib_test.js`
+* `node_and_browser_closure`: Works with both and Closure compiler.
+  - Example browser: `open node_and_browser_closure/example.html` node: `node node_and_browser_closure/caller.js`
+  - Compiled: `open node_and_browser_closure/example_compiled.html` node: `node build/node_and_browser_closure/caller.js`
+  - Browser unit test: `open node_and_browser_closure/mylib_test.html` or `open node_and_browser_closure/mylib_compiled_test.html`
+  - Automated browser test: `node_modules/karma/bin/karma start node_and_browser_closure/uncompiled.conf.js --single-run`
+  - Automated node test: `./node_modules/.bin/jasmine-node --matchAll node_and_browser_closure/mylib_test.js`
 
 
 # Other Projects using Closure Compiler:
@@ -33,4 +44,3 @@ This repository shows how to do this.
 * https://github.com/Lindurion/closure-pro-build
 * https://github.com/steida/este
 * https://github.com/google/module-server
-
