@@ -3,8 +3,8 @@ BUILD_DIR=build
 BROWSER_TEST_DIR:=$(BUILD_DIR)/browsertest
 SOURCE_DIR=src
 
-CLOSURE_COMPILER=/Users/ej/Downloads/compiler.jar
-CLOSURE_FLAGS=--language_in ECMASCRIPT5_STRICT --warning_level VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS --externs mocha_externs.js
+CLOSURE_COMPILER=java -jar $(HOME)/Downloads/compiler.jar
+CLOSURE_FLAGS=--language_in ECMASCRIPT5_STRICT --warning_level VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS
 
 all: $(BUILD_DIR)/basic_browser/compiled.js $(BUILD_DIR)/node/compiled.js $(BUILD_DIR)/closure/compiled.js test
 
@@ -24,6 +24,10 @@ clean:
 # $(BROWSER_TEST_DIR)/mocha.css:
 # 	mkdir -p $(BROWSER_TEST_DIR)
 # 	$(BIN)/mocha init $(BROWSER_TEST_DIR)
+
+$(BUILD_DIR)/simple_both_closure/caller.js: simple_both_closure/mylib.js simple_both_closure/caller.js
+	mkdir -p $(dir $@)
+	$(CLOSURE_COMPILER) $(CLOSURE_FLAGS) $^ --js_output_file $@ --externs simple_both_closure/externs_node.js
 
 $(BUILD_DIR)/basic_browser/compiled.js: basic_browser/relative.js basic_browser/module.js basic_browser/module_test.js
 	mkdir -p $(dir $@)
