@@ -39,8 +39,9 @@ For details, see [my blog post about JavaScript modules](http://www.evanjones.ca
   - Automated node test: `./node_modules/.bin/jasmine-node --matchAll node_and_browser_closure/mylib_test.js`
 
 
-# Other Projects using Closure Compiler:
+# Related projects using the Closure compiler:
 
+* https://github.com/nicks/closure-compiler/tree/nick-npm/package/closure-npc
 * https://github.com/Lindurion/closure-pro-build
 * https://github.com/steida/este
 * https://github.com/google/module-server
